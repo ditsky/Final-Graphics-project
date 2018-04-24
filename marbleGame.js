@@ -73,13 +73,15 @@ The user moves a cube around the board trying to knock balls into a cone
 			var light0 = new THREE.AmbientLight( 0xffffff,0.25);
 			scene.add(light0);
 
+			createLevel1();
+
 			// create main camera
 			camera = new THREE.PerspectiveCamera( 90, window.innerWidth / window.innerHeight, 0.1, 1000 );
 			camera.position.set(0,50,0);
 			camera.lookAt(0,0,0);
 
 
-
+			/*
 			// create the ground and the skybox
 			var ground = createGround('sky.jpg', 40, 150);
 			scene.add(ground);
@@ -118,6 +120,7 @@ The user moves a cube around the board trying to knock balls into a cone
 			plane7.position.z = 25;
 			plane7.position.y = 0;
 			scene.add(plane7);
+			*/
 
 			var cone = createConeMesh(5,20);
 			cone.position.set(70,20,70);
@@ -313,7 +316,21 @@ The user moves a cube around the board trying to knock balls into a cone
 		return mesh;
 	}
 
+	function createLevel1(){
+		var loader = new THREE.JSONLoader();
+		loader.load("../models/marbleGame.json",
+		function ( geometry, materials ) {
+						var material = materials[ 0 ];
+						//new THREE.MeshLambertMaterial( { color: 0x00ff00 } );
+						level1 = new Physijs.BoxMesh( geometry, material );
+						scene.add(level1);
+		},
+		function(xhr){
+						console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );},
+		function(err){console.log("error in loading: "+err);}
+		)
 
+	}
 
 
 
