@@ -154,7 +154,7 @@ The user moves a cube around the board trying to knock balls into a cone
 			// create the avatar
 			avatarCam = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 0.1, 1000 );
 			avatar = createAvatar();
-			avatar.translateY(20);
+			avatar.position.set(-75,60,0);
 			scene.add(avatar);
 			gameState.camera = avatarCam;
 
@@ -343,9 +343,12 @@ The user moves a cube around the board trying to knock balls into a cone
 		var loader = new THREE.JSONLoader();
 		loader.load("../models/marbleGame.json",
 		function ( geometry, materials ) {
-						var material = materials[ 0 ];
-						//new THREE.MeshLambertMaterial( { color: 0x00ff00 } );
-						level1 = new Physijs.BoxMesh( geometry, material );
+						var material = //materials[ 0 ];
+						new THREE.MeshLambertMaterial( { color: 0x00ff00 } );
+						level1 = new Physijs.PlaneMesh( geometry, material, 0 );
+						level1.scale.set(100,100,100);
+						level1.translateY(-500);
+
 						scene.add(level1);
 		},
 		function(xhr){
@@ -432,9 +435,9 @@ The user moves a cube around the board trying to knock balls into a cone
 
   function updateAvatar(){
 		"change the avatar's linear or angular velocity based on controls state (set by WSAD key presses)"
-		if (avatar.position.y<-20){
+		if (avatar.position.y<-1000){
       avatar.__dirtyPosition = true;
-      avatar.position.set(40,10,40);
+      avatar.position.set(-75,60,0);
 			gameState.health--;
 			if(gameState.health==0) {
 				gameState.scene='youlose';
