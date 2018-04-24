@@ -135,19 +135,6 @@ The user moves a cube around the board trying to knock balls into a cone
       edgeCam = new THREE.PerspectiveCamera( 90, window.innerWidth / window.innerHeight, 0.1, 1000 );
       edgeCam.position.set(0,100,100);
 			gameState.camera = edgeCam;
-
-			//
-			// addBalls();
-
-			//scene.add(cone);
-			//
-			// npc = createBoxMesh(0x0000ff);
-			// npc.position.set(30,5,-30);
-			// npc.scale.set(1,2,4);
-			// scene.add(npc);
-			// console.dir(npc);
-			// //playGameMusic();
-
 	}
 
 
@@ -436,12 +423,6 @@ The user moves a cube around the board trying to knock balls into a cone
     }
 
 	}
-
-	function updateCamera(){
-
-	}
-
-
 
 	function animate() {
 
