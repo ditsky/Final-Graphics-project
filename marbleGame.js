@@ -15,6 +15,7 @@ The user moves a cube around the board trying to knock balls into a cone
 	// here are some mesh objects ...
 
 	var cone;
+	var level1;
 	// var npc;
 
 	var winScene, loseScene, winCamera, loseCamera, winText, loseText;
@@ -25,7 +26,7 @@ The user moves a cube around the board trying to knock balls into a cone
 
 	var controls =
 	     {fwd:false, bwd:false, left:false, right:false,
-				speed:10, fly:false, reset:false}
+				speed:50, fly:false, reset:false}
 
 	var gameState =
 	     {score:0, health:10, scene:'main', camera:'none' }
@@ -88,54 +89,53 @@ The user moves a cube around the board trying to knock balls into a cone
 			var light0 = new THREE.AmbientLight( 0xffffff,0.25);
 			scene.add(light0);
 
-			createLevel1();
-
+			//createLevel1();
 			// create main camera
 			camera = new THREE.PerspectiveCamera( 90, window.innerWidth / window.innerHeight, 0.1, 1000 );
 			camera.position.set(0,50,0);
 			camera.lookAt(0,0,0);
 
 
-			/*
+
 			// create the ground and the skybox
-			var ground = createGround('sky.jpg', 40, 150);
+			var ground = createGround('bernie.jpg', 40, 150);
 			scene.add(ground);
-			var plane2 = createGround('sky.jpg', 160, 30);
+			var plane2 = createGround('bernie.jpg', 160, 30);
 			plane2.position.x = -60;
 			plane2.position.z = -85;
 			scene.add(plane2);
 
-			var plane3 = createGround('sky.jpg', 30, 150);
+			var plane3 = createGround('bernie.jpg', 30, 150);
 			plane3.position.x = -130;
 			plane3.position.z = -145;
 			plane3.position.y = 0;
 			scene.add(plane3);
 			//scene.add(skybox);
 
-			var plane4 = createGround('sky.jpg', 300, 50);
+			var plane4 = createGround('bernie.jpg', 300, 50);
 			plane4.position.x = 30;
 			plane4.position.z = -200;
 			plane4.position.y = 0;
 			scene.add(plane4);
 
-			var plane5 = createGround('sky.jpg', 50, 200);
+			var plane5 = createGround('bernie.jpg', 50, 200);
 			plane5.position.x = 170;
 			plane5.position.z = -120;
 			plane5.position.y = 0;
 			scene.add(plane5);
 
-			var plane6 = createGround('sky.jpg', 70, 30);
+			var plane6 = createGround('bernie.jpg', 70, 30);
 			plane6.position.x = 120;
 			plane6.position.z = -35;
 			plane6.position.y = 0;
 			scene.add(plane6);
 
-			var plane7 = createGround('sky.jpg', 30, 150);
+			var plane7 = createGround('bernie.jpg', 30, 150);
 			plane7.position.x = 70;
 			plane7.position.z = 25;
 			plane7.position.y = 0;
 			scene.add(plane7);
-			*/
+
 
 			var cone = createConeMesh(5,20);
 
@@ -154,13 +154,25 @@ The user moves a cube around the board trying to knock balls into a cone
 			// create the avatar
 			avatarCam = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 0.1, 1000 );
 			avatar = createAvatar();
-			avatar.position.set(-75,60,0);
+			//if we use level 1 this is kinda close
+			//avatar.position.set(0,70,300);
+			//for the normal game
+			avatar.position.set(0,30,0);
 			scene.add(avatar);
 			gameState.camera = avatarCam;
 
       edgeCam = new THREE.PerspectiveCamera( 90, window.innerWidth / window.innerHeight, 0.1, 1000 );
       edgeCam.position.set(0,100,100);
 			gameState.camera = edgeCam;
+	}
+
+	function createLevel2() {
+		var ground = createGround('bernie.jpg', 40, 150);
+		scene.add(ground);
+		var plane2 = createGround('bernie.jpg', 160, 30);
+		plane2.position.x = -60;
+		plane2.position.z = -85;
+		scene.add(plane2);
 	}
 
 
@@ -344,10 +356,11 @@ The user moves a cube around the board trying to knock balls into a cone
 		loader.load("../models/marbleGame.json",
 		function ( geometry, materials ) {
 						var material = //materials[ 0 ];
-						new THREE.MeshLambertMaterial( { color: 0x00ff00 } );
-						level1 = new Physijs.PlaneMesh( geometry, material, 0 );
-						level1.scale.set(100,100,100);
-						level1.translateY(-500);
+						//new THREE.MeshLambertMaterial( { color: 0x00ff00 } );
+						new THREE.MeshBasicMaterial({ wireframe: true, opacity: 0.5 })
+						level1 = new Physijs.BoxMesh( geometry, material, 0 );
+						level1.scale.set(50,50,50);
+						level1.translateY(-200);
 
 						scene.add(level1);
 		},
@@ -355,6 +368,8 @@ The user moves a cube around the board trying to knock balls into a cone
 						console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );},
 		function(err){console.log("error in loading: "+err);}
 		)
+
+
 
 	}
 
@@ -393,7 +408,7 @@ The user moves a cube around the board trying to knock balls into a cone
 			case "d": controls.right = true; break;
 			case "r": controls.up = true; break;
 			case "f": controls.down = true; break;
-			case "m": controls.speed = 30; break;
+			case "m": controls.speed = 100; break;
       case " ": controls.fly = true;
           console.log("space!!");
           break;
@@ -427,7 +442,7 @@ The user moves a cube around the board trying to knock balls into a cone
 			case "d": controls.right = false; break;
 			// case "r": controls.up    = false; break;
 			// case "f": controls.down  = false; break;
-			case "m": controls.speed = 10; break;
+			case "m": controls.speed = 50; break;
       case " ": controls.fly = false; break;
       case "r": controls.reset = false; break;
 		}
@@ -437,7 +452,7 @@ The user moves a cube around the board trying to knock balls into a cone
 		"change the avatar's linear or angular velocity based on controls state (set by WSAD key presses)"
 		if (avatar.position.y<-1000){
       avatar.__dirtyPosition = true;
-      avatar.position.set(-75,60,0);
+      avatar.position.set(0,30,0);
 			gameState.health--;
 			if(gameState.health==0) {
 				gameState.scene='youlose';
@@ -452,7 +467,8 @@ The user moves a cube around the board trying to knock balls into a cone
 		} else {
 			var velocity = avatar.getLinearVelocity();
 			velocity.x=velocity.z=0;
-			//avatar.setLinearVelocity(velocity); //stop the xz motion
+
+			avatar.setLinearVelocity(velocity); //stop the xz motion
 		}
 
     if (controls.fly){
