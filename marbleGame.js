@@ -167,7 +167,7 @@ The user moves a cube around the board trying to knock balls into a cone
 						scene.remove(plane6);
 						scene.remove(plane7);
 						avatar.__dirtyPosition = true;
-			      avatar.position.set(10,10,10);
+						avatar.position.set(10,10,10);
 						createLevel3();
 				}
 			}
@@ -203,7 +203,7 @@ The user moves a cube around the board trying to knock balls into a cone
 		light.position.set(0,200,20);
 		var ground = createGround('bernie.jpg', 75, 100);
 		scene.add(ground);
-		var plane = createGround('bernie.jpg', 50, 200);
+		var plane = createGroundFric('ice.jpg', 50, 200, 0);
 		plane.position.x = 0;
 		plane.position.y = 55;
 		plane.position.z = 130;
@@ -346,6 +346,24 @@ The user moves a cube around the board trying to knock balls into a cone
 		mesh.rotateX(Math.PI/2);
 		return mesh
 		// we need to rotate the mesh 90 degrees to make it horizontal not vertical
+	}
+
+	function createGroundFric(image, width, height, friction) {
+		// creating a textured plane which receives shadows
+		var geometry = new THREE.PlaneGeometry( width, height, 128 );
+		var texture = new THREE.TextureLoader().load( '../images/'+image );
+		// texture.wrapS = THREE.RepeatWrapping;
+		// texture.wrapT = THREE.RepeatWrapping;
+		// texture.repeat.set( 2, 2 );
+		var material = new THREE.MeshLambertMaterial( { color: 0xffffff,  map: texture ,side:THREE.DoubleSide});
+		var pmaterial = new Physijs.createMaterial(material,friction,0.05);
+		//var mesh = new THREE.Mesh( geometry, material );
+		var mesh = new Physijs.BoxMesh( geometry, pmaterial);
+
+		mesh.receiveShadow = true;
+
+		mesh.rotateX(Math.PI/2);
+		return mesh
 	}
 
 
