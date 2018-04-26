@@ -560,7 +560,8 @@ function createBestLevel(){
       case " ": controls.fly = true;
           console.log("space!!");
           break;
-      case "h": avatar.__dirtyPosition = true;
+      case "h": avatar.__dirtyPosition = true; avatar.__dirtyRotation=true; controls.speed=50;
+			avatar.rotation.set(0,0,0); avatar.setLinearVelocity(0,0,0);
       avatar.position.set(startPosition.x,startPosition.y,startPosition.z);
 			break;
 
