@@ -115,14 +115,8 @@ The user moves a cube around the board trying to knock balls into a cone
 function createBestLevel(){
 	startPosition=new THREE.Vector3(0,30,0);
 
-	// var background = createGround('vaporwave.jpg',100,100);
-	// background.rotateX(90);
-	// background.rotateZ(180);
-	// background.position.z = -40;
-	// scene.add(background);
 
-
-	var grounddog = createGround('dogs.jpg', 40, 40);
+	var grounddog = createGround('metallic.jpg', 40, 40);
 	scene.add(grounddog);
 	var plane2dog = createGround('green.jpg', 50, 50);
 	plane2dog.position.x = -30;
@@ -140,7 +134,7 @@ function createBestLevel(){
 			)
 				scene.add(plane2dog);
 
-	var plane4dog = createGround('dogs.jpg', 200, 50);
+	var plane4dog = createGround('metallic.jpg', 200, 50);
 	plane4dog.position.x = 30;
 	plane4dog.position.z = -200;
 	plane4dog.position.y = 0;
@@ -164,7 +158,7 @@ function createBestLevel(){
 				scene.add(plane5dog);
 	scene.add(plane5dog);
 
-	var plane6dog = createGround('dogs.jpg', 70, 30);
+	var plane6dog = createGround('metallic.jpg', 70, 30);
 	plane6dog.position.x = 120;
 	plane6dog.position.z = -35;
 	plane6dog.position.y = 0;
@@ -172,7 +166,7 @@ function createBestLevel(){
 
 	scene.add(plane6dog);
 
-	var plane7dog = createGround('dogs.jpg', 30, 150);
+	var plane7dog = createGround('metallic.jpg', 30, 150);
 	plane7dog.position.x = 70;
 	plane7dog.position.z = 25;
 	plane7dog.position.y = 0;
@@ -311,13 +305,6 @@ function createBestLevel(){
 	}
 
 
-	function randN(n){
-		return Math.random()*n;
-	}
-
-
-
-
 	function playGameMusic(){
 		// create an AudioListener and add it to the camera
 		var listener = new THREE.AudioListener();
@@ -393,24 +380,6 @@ function createBestLevel(){
 	}
 
 
-
-	function createBoxMesh(color){
-		var geometry = new THREE.BoxGeometry( 1, 1, 1);
-		var material = new THREE.MeshLambertMaterial( { color: color} );
-		mesh = new Physijs.BoxMesh( geometry, material );
-    //mesh = new Physijs.BoxMesh( geometry, material,0 );
-		mesh.castShadow = true;
-		return mesh;
-	}
-
-	function createBoxMesh2(color,w,h,d){
-		var geometry = new THREE.BoxGeometry( w, h, d);
-		var material = new THREE.MeshLambertMaterial( { color: color} );
-		mesh = new Physijs.BoxMesh( geometry, material );
-		//mesh = new Physijs.BoxMesh( geometry, material,0 );
-		mesh.castShadow = true;
-		return mesh;
-	}
 
 
 		function createConeMesh(r,h){
@@ -503,25 +472,6 @@ function createBestLevel(){
 		return mesh;
 	}
 
-	/*function createLevel1(){
-		var loader = new THREE.JSONLoader();
-		loader.load("../models/marbleGame.json",
-		function ( geometry, materials ) {
-						var material = //materials[ 0 ];
-						//new THREE.MeshLambertMaterial( { color: 0x00ff00 } );
-						new THREE.MeshBasicMaterial({ wireframe: true, opacity: 0.5 })
-						level1 = new Physijs.BoxMesh( geometry, material, 0 );
-						level1.scale.set(50,50,50);
-						level1.translateY(-200);
-
-						scene.add(level1);
-		},
-		function(xhr){
-						console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );},
-		function(err){console.log("error in loading: "+err);}
-	)}*/
-
-
 
 	var clock;
 
@@ -554,13 +504,8 @@ function createBestLevel(){
 			case "s": controls.bwd = true; break;
 			case "a": controls.left = true; break;
 			case "d": controls.right = true; break;
-			case "r": controls.up = true; break;
-			case "f": controls.down = true; break;
-			case "m": controls.speed = 100; break;
-      case " ": controls.fly = true;
-          console.log("space!!");
-          break;
-      case "h": avatar.__dirtyPosition = true; avatar.__dirtyRotation=true; controls.speed=50;
+
+			case "h": avatar.__dirtyPosition = true; avatar.__dirtyRotation=true; controls.speed=50;
 			avatar.rotation.set(0,0,0); avatar.setLinearVelocity(0,0,0);
       avatar.position.set(startPosition.x,startPosition.y,startPosition.z);
 			break;
@@ -571,13 +516,6 @@ function createBestLevel(){
 			case "2": gameState.camera = avatarCam; break;
       case "3": gameState.camera = edgeCam; break;
 
-			// move the camera around, relative to the avatar
-			case "ArrowLeft": avatarCam.translateY(1);break;
-			case "ArrowRight": avatarCam.translateY(-1);break;
-			case "ArrowUp": avatarCam.translateZ(-1);break;
-			case "ArrowDown": avatarCam.translateZ(1);break;
-			case "[": avatarCam.translateX(-1);break;
-			case "]": avatarCam.translateX(1);break;
 
 		}
 
@@ -593,8 +531,7 @@ function createBestLevel(){
 			case "d": controls.right = false; break;
 			// case "r": controls.up    = false; break;
 			// case "f": controls.down  = false; break;
-			case "m": controls.speed = 50; break;
-      case " ": controls.fly = false; break;
+
       //case "h": controls.reset = false; break;
 		}
 	}
@@ -622,9 +559,6 @@ function createBestLevel(){
 			avatar.setLinearVelocity(velocity); //stop the xz motion
 		}
 
-    if (controls.fly){
-      avatar.setLinearVelocity(new THREE.Vector3(0,controls.speed,0));
-    }
 
 		if (controls.left){
 			avatar.setAngularVelocity(new THREE.Vector3(0,controls.speed*0.1,0));
