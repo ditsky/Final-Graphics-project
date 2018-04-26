@@ -263,6 +263,8 @@ function createBestLevel(){
 	}
 
 	function createLevel3() {
+		var light1 = createPointLight();
+		light1.position.set(350,350,350);
 		var ground = createGround('bernie.jpg', 75, 100);
 		scene.add(ground);
 		var plane = createGroundFric('ice.jpg', 50, 200, 0);
@@ -279,11 +281,27 @@ function createBestLevel(){
 		scene.add(plane);
 		var plane2 = createGround('bernie.jpg', 60, 150);
 		plane2.position.x = 0;
-		plane2.position.y = 120;
+		plane2.position.y = 230;
 		plane2.position.z = 295;
 		scene.add(plane2);
+		plane2.addEventListener( 'collision',
+			function(other_object) {
+				if(other_object==avatar) {
+					avatar.__dirtyPosition = true;
+					avatar.position.set(305, 305, 305);
+					avatar.setLinearVelocity(new THREE.Vector3(0,0,0));
+					avatar.setAngularVelocity(new THREE.Vector3(0,0,0));
+				}
+			}
+		)
+		var plane3 = createGround('bernie.jpg', 150, 150);
+		plane3.position.x = 300;
+		plane3.position.y = 300;
+		plane3.position.z = 300;
+		scene.add(plane3);
+
 		var cone = createConeMesh(5,20);
-		cone.position.set(0,120,295);
+		cone.position.set(280, 320, 260);
 		scene.add(cone);
 
 	}
