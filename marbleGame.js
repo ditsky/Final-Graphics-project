@@ -15,6 +15,7 @@ The user moves a cube around the board trying to knock balls into a cone
 	// here are some mesh objects ...
 
 	var cone;
+	var startPosition = new THREE.Vector3(0,30,0);
 	var level1;
 	// var npc;
 
@@ -112,11 +113,14 @@ The user moves a cube around the board trying to knock balls into a cone
 			createLevel1();
 	}
 function createBestLevel(){
+	startPosition=new THREE.Vector3(0,30,0);
+
 	// var background = createGround('vaporwave.jpg',100,100);
 	// background.rotateX(90);
 	// background.rotateZ(180);
 	// background.position.z = -40;
 	// scene.add(background);
+
 
 	var grounddog = createGround('dogs.jpg', 40, 40);
 	scene.add(grounddog);
@@ -178,6 +182,7 @@ function createBestLevel(){
 
 }
 	function createLevel1() {
+		startPosition = new THREE.Vector3(0,30,0);
 		var light = createPointLight();
 		light.position.set(0,200,20);
 		// create the ground and the skybox
@@ -233,36 +238,16 @@ function createBestLevel(){
 						scene.remove(plane5);
 						scene.remove(plane6);
 						scene.remove(plane7);
+						scene.remove(cone);
 						avatar.__dirtyPosition = true;
 						avatar.position.set(10,10,10);
 						createLevel3();
 				}
 			})
-
-
-	/*	lvl2Scene = initScene();
-
-		var light1 = createPointLight();
-		light1.position.set(0,200,20);
-		lvl2Scene.add(light1);
-		var light0 = new THREE.AmbientLight( 0xffffff,0.25);
-		lvl2Scene.add(light0);
-
-		var ground = createGround('bernie.jpg', 20, 150);
-		ground.rotateZ(Math.PI/2);
-		scene.add(ground);
-		var plane2 = createGround('bernie.jpg', 160, 30);
-		plane2.position.x = -60;
-		plane2.position.z = -85;
-		scene.add(plane2);
-
-		lvl2Camera = new THREE.PerspectiveCamera( 90, window.innerWidth / window.innerHeight, 0.1, 1000 );
-		lvl2Camera.position.set(0,50,1);
-		lvl2Camera.lookAt(0,0,0);
-		gameState.camera = lvl2Camera;*/
 	}
 
 	function createLevel3() {
+		startPosition = new THREE.Vector3(10,10,10);
 		var ground = createGround('bernie.jpg', 75, 100);
 		scene.add(ground);
 		var plane = createGroundFric('ice.jpg', 50, 200, 0);
@@ -538,7 +523,9 @@ function createBestLevel(){
       case " ": controls.fly = true;
           console.log("space!!");
           break;
-      case "h": controls.reset = true; break;
+      case "h": avatar.__dirtyPosition = true;
+      avatar.position.set(startPosition.x,startPosition.y,startPosition.z);
+			break;
 
 
 			// switch cameras
@@ -570,7 +557,7 @@ function createBestLevel(){
 			// case "f": controls.down  = false; break;
 			case "m": controls.speed = 50; break;
       case " ": controls.fly = false; break;
-      case "r": controls.reset = false; break;
+      //case "h": controls.reset = false; break;
 		}
 	}
 
@@ -609,10 +596,6 @@ function createBestLevel(){
 			avatar.setAngularVelocity(new THREE.Vector3(0,0,0));
 		}
 
-    if (controls.reset){
-      avatar.__dirtyPosition = true;
-      avatar.position.set(40,10,40);
-    }
 
 	}
 
