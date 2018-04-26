@@ -293,20 +293,20 @@ function createBestLevel(){
 					avatar.__dirtyRotation = true;
 					avatar.__dirtyPosition = true;
 					avatar.rotation.set(0,0,0);
-					avatar.position.set(305, 305, 305);
+					avatar.position.set(255, 255, 255);
 					avatar.setLinearVelocity(new THREE.Vector3(0,0,0));
 					avatar.setAngularVelocity(new THREE.Vector3(0,0,0));
 				}
 			}
 		)
 		var plane3 = createGround('bernie.jpg', 150, 150);
-		plane3.position.x = 300;
-		plane3.position.y = 300;
-		plane3.position.z = 300;
+		plane3.position.x = 230;
+		plane3.position.y = 230;
+		plane3.position.z = 230;
 		scene.add(plane3);
 
 		var cone = createConeMesh(5,20);
-		cone.position.set(280, 320, 260);
+		cone.position.set(230, 250, 210);
 		cone.addEventListener( 'collision',
 			function(other_object) {
 				if(other_object==avatar) {
