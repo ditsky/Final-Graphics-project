@@ -181,6 +181,8 @@ function createBestLevel(){
 		var light = createPointLight();
 		light.position.set(0,200,20);
 		// create the ground and the skybox
+		var matrix = createSkyBox('matrix.jpg',2);
+		scene.add(matrix);
 		var ground = createGround('bernie.jpg', 40, 150);
 		scene.add(ground);
 		var plane2 = createGround('bernie.jpg', 160, 30);
@@ -442,7 +444,7 @@ function createBestLevel(){
 
 	function createSkyBox(image,k){
 		// creating a textured plane which receives shadows
-		var geometry = new THREE.SphereGeometry( 80, 80, 80 );
+		var geometry = new THREE.SphereGeometry( 500, 500, 500 );
 		var texture = new THREE.TextureLoader().load( '../images/'+image );
 		texture.wrapS = THREE.RepeatWrapping;
 		texture.wrapT = THREE.RepeatWrapping;
