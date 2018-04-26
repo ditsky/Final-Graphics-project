@@ -505,7 +505,8 @@ function createBestLevel(){
 			case "a": controls.left = true; break;
 			case "d": controls.right = true; break;
 
-      case "h": avatar.__dirtyPosition = true;
+			case "h": avatar.__dirtyPosition = true; avatar.__dirtyRotation=true; controls.speed=50;
+			avatar.rotation.set(0,0,0); avatar.setLinearVelocity(0,0,0);
       avatar.position.set(startPosition.x,startPosition.y,startPosition.z);
 			break;
 
