@@ -509,7 +509,7 @@ The user moves a cube around the board trying to knock balls into a cone
 
   function updateAvatar(){
 		"change the avatar's linear or angular velocity based on controls state (set by WSAD key presses)"
-		if (avatar.position.y<-1000){
+		if (avatar.position.y<-100){
       avatar.__dirtyPosition = true;
       avatar.position.set(0,30,0);
 			gameState.health--;
