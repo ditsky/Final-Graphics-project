@@ -30,7 +30,7 @@ The user moves a cube around the board trying to knock balls into a cone
 				speed:50, fly:false, reset:false}
 
 	var gameState =
-	     {score:0, health:10, scene:'main', camera:'none' }
+	     {score:0, health:3, scene:'main', camera:'none' }
 
 
 	// Here is the main game control
@@ -559,13 +559,13 @@ function createBestLevel(){
 
   function updateAvatar(){
 		"change the avatar's linear or angular velocity based on controls state (set by WSAD key presses)"
-		if (avatar.position.y<-100){
-      avatar.__dirtyPosition = true;
-      avatar.position.set(0,30,0);
+		if (avatar.position.y<-25){
 			gameState.health--;
 			if(gameState.health==0) {
 				gameState.scene='youlose';
 			}
+			avatar.__dirtyPosition = true;
+      avatar.position.set(0,30,0);
     }
 		var forward = avatar.getWorldDirection();
 		var gravity = new THREE.Vector3(0,-10,0);
