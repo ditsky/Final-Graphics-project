@@ -274,7 +274,10 @@ function createBestLevel(){
 		plane2.addEventListener( 'collision',
 			function(other_object) {
 				if(other_object==avatar) {
+					controls.speed=50;
+					avatar.__dirtyRotation = true;
 					avatar.__dirtyPosition = true;
+					avatar.rotation.set(0,0,0);
 					avatar.position.set(305, 305, 305);
 					avatar.setLinearVelocity(new THREE.Vector3(0,0,0));
 					avatar.setAngularVelocity(new THREE.Vector3(0,0,0));
