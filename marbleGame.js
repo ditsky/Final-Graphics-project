@@ -15,6 +15,7 @@ The user moves a cube around the board trying to knock balls into a cone
 	// here are some mesh objects ...
 
 	var cone;
+	var startPosition = new THREE.Vector3(0,30,0);
 	var level1;
 	// var npc;
 
@@ -112,11 +113,14 @@ The user moves a cube around the board trying to knock balls into a cone
 			createLevel1();
 	}
 function createBestLevel(){
+	startPosition=new THREE.Vector3(0,30,0);
+
 	// var background = createGround('vaporwave.jpg',100,100);
 	// background.rotateX(90);
 	// background.rotateZ(180);
 	// background.position.z = -40;
 	// scene.add(background);
+
 
 	var grounddog = createGround('dogs.jpg', 40, 40);
 	scene.add(grounddog);
@@ -178,42 +182,45 @@ function createBestLevel(){
 
 }
 	function createLevel1() {
+		startPosition = new THREE.Vector3(0,30,0);
 		var light = createPointLight();
 		light.position.set(0,200,20);
 		// create the ground and the skybox
-		var ground = createGround('bernie.jpg', 40, 150);
+		var matrix = createSkyBox('matrix.jpg',2);
+		scene.add(matrix);
+		var ground = createGround('metallic.jpg', 40, 150);
 		scene.add(ground);
-		var plane2 = createGround('bernie.jpg', 160, 30);
+		var plane2 = createGround('metallic.jpg', 160, 30);
 		plane2.position.x = -60;
 		plane2.position.z = -85;
 		scene.add(plane2);
 
-		var plane3 = createGround('bernie.jpg', 30, 150);
+		var plane3 = createGround('metallic.jpg', 30, 150);
 		plane3.position.x = -130;
 		plane3.position.z = -145;
 		plane3.position.y = 0;
 		scene.add(plane3);
 		//scene.add(skybox);
 
-		var plane4 = createGround('bernie.jpg', 300, 50);
+		var plane4 = createGround('metallic.jpg', 300, 50);
 		plane4.position.x = 30;
 		plane4.position.z = -200;
 		plane4.position.y = 0;
 		scene.add(plane4);
 
-		var plane5 = createGround('bernie.jpg', 50, 200);
+		var plane5 = createGround('metallic.jpg', 50, 200);
 		plane5.position.x = 170;
 		plane5.position.z = -120;
 		plane5.position.y = 0;
 		scene.add(plane5);
 
-		var plane6 = createGround('bernie.jpg', 70, 30);
+		var plane6 = createGround('metallic.jpg', 70, 30);
 		plane6.position.x = 120;
 		plane6.position.z = -35;
 		plane6.position.y = 0;
 		scene.add(plane6);
 
-		var plane7 = createGround('bernie.jpg', 30, 150);
+		var plane7 = createGround('metallic.jpg', 30, 150);
 		plane7.position.x = 70;
 		plane7.position.z = 25;
 		plane7.position.y = 0;
@@ -233,39 +240,19 @@ function createBestLevel(){
 						scene.remove(plane5);
 						scene.remove(plane6);
 						scene.remove(plane7);
+						scene.remove(cone);
 						avatar.__dirtyPosition = true;
 						avatar.position.set(10,10,10);
 						createLevel3();
 				}
 			})
-
-
-	/*	lvl2Scene = initScene();
-
-		var light1 = createPointLight();
-		light1.position.set(0,200,20);
-		lvl2Scene.add(light1);
-		var light0 = new THREE.AmbientLight( 0xffffff,0.25);
-		lvl2Scene.add(light0);
-
-		var ground = createGround('bernie.jpg', 20, 150);
-		ground.rotateZ(Math.PI/2);
-		scene.add(ground);
-		var plane2 = createGround('bernie.jpg', 160, 30);
-		plane2.position.x = -60;
-		plane2.position.z = -85;
-		scene.add(plane2);
-
-		lvl2Camera = new THREE.PerspectiveCamera( 90, window.innerWidth / window.innerHeight, 0.1, 1000 );
-		lvl2Camera.position.set(0,50,1);
-		lvl2Camera.lookAt(0,0,0);
-		gameState.camera = lvl2Camera;*/
 	}
 
 	function createLevel3() {
+		startPosition = new THREE.Vector3(10,10,10);
+		var ground = createGround('metallic.jpg', 75, 100);
 		var light1 = createPointLight();
 		light1.position.set(350,350,350);
-		var ground = createGround('bernie.jpg', 75, 100);
 		scene.add(ground);
 		var plane = createGroundFric('ice.jpg', 50, 200, 0);
 		plane.addEventListener( 'collision',
@@ -279,7 +266,7 @@ function createBestLevel(){
 		plane.position.z = 130;
 		plane.rotateX(-Math.PI/5);
 		scene.add(plane);
-		var plane2 = createGround('bernie.jpg', 60, 150);
+		var plane2 = createGround('metallic.jpg', 60, 150);
 		plane2.position.x = 0;
 		plane2.position.y = 230;
 		plane2.position.z = 295;
@@ -460,7 +447,7 @@ function createBestLevel(){
 
 	function createSkyBox(image,k){
 		// creating a textured plane which receives shadows
-		var geometry = new THREE.SphereGeometry( 80, 80, 80 );
+		var geometry = new THREE.SphereGeometry( 500, 500, 500 );
 		var texture = new THREE.TextureLoader().load( '../images/'+image );
 		texture.wrapS = THREE.RepeatWrapping;
 		texture.wrapT = THREE.RepeatWrapping;
@@ -556,7 +543,9 @@ function createBestLevel(){
       case " ": controls.fly = true;
           console.log("space!!");
           break;
-      case "h": controls.reset = true; break;
+      case "h": avatar.__dirtyPosition = true;
+      avatar.position.set(startPosition.x,startPosition.y,startPosition.z);
+			break;
 
 
 			// switch cameras
@@ -588,7 +577,7 @@ function createBestLevel(){
 			// case "f": controls.down  = false; break;
 			case "m": controls.speed = 50; break;
       case " ": controls.fly = false; break;
-      case "r": controls.reset = false; break;
+      //case "h": controls.reset = false; break;
 		}
 	}
 
@@ -627,10 +616,6 @@ function createBestLevel(){
 			avatar.setAngularVelocity(new THREE.Vector3(0,0,0));
 		}
 
-    if (controls.reset){
-      avatar.__dirtyPosition = true;
-      avatar.position.set(40,10,40);
-    }
 
 	}
 
