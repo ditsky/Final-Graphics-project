@@ -166,6 +166,9 @@ The user moves a cube around the board trying to knock balls into a cone
 						scene.remove(plane5);
 						scene.remove(plane6);
 						scene.remove(plane7);
+						avatar.__dirtyPosition = true;
+			      avatar.position.set(10,10,10);
+						createLevel3();
 				}
 			}
 				)
