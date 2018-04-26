@@ -175,6 +175,24 @@ The user moves a cube around the board trying to knock balls into a cone
 		scene.add(plane2);
 	}
 
+	function createLevel3() {
+		var light = createPointLight();
+		light.position.set(0,200,20);
+		var ground = createGround('bernie.jpg', 75, 100);
+		scene.add(ground);
+		var plane = createGround('bernie.jpg', 50, 200);
+		plane.position.x = 0;
+		plane.position.y = 55;
+		plane.position.z = 130;
+		plane.rotateX(-Math.PI/5);
+		scene.add(plane);
+		var plane2 = createGround('bernie.jpg', 60, 150);
+		plane2.position.x = 60;
+		plane2.position.z = 150;
+		scene.add(plane2);
+
+	}
+
 
 	function randN(n){
 		return Math.random()*n;
