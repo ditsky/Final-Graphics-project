@@ -18,7 +18,7 @@ The user moves a cube around the board trying to knock balls into a cone
 	var level1;
 	// var npc;
 
-	var winScene, loseScene, winCamera, loseCamera, winText, loseText;
+	var winScene, loseScene, winCamera, loseCamera, winText, loseText, lvl2Scene, lvl2Camera;
 
 
 
@@ -74,11 +74,12 @@ The user moves a cube around the board trying to knock balls into a cone
 	function init(){
       initPhysijs();
 			scene = initScene();
+			initRenderer();
 			createWinScene();
 			createLoseScene();
-			initRenderer();
 			createMainScene();
-	}
+		}
+
 
 
 	function createMainScene(){
@@ -94,63 +95,6 @@ The user moves a cube around the board trying to knock balls into a cone
 			camera = new THREE.PerspectiveCamera( 90, window.innerWidth / window.innerHeight, 0.1, 1000 );
 			camera.position.set(0,50,0);
 			camera.lookAt(0,0,0);
-
-
-
-			// create the ground and the skybox
-			var ground = createGround('bernie.jpg', 40, 150);
-			scene.add(ground);
-			var plane2 = createGround('bernie.jpg', 160, 30);
-			plane2.position.x = -60;
-			plane2.position.z = -85;
-			scene.add(plane2);
-
-			var plane3 = createGround('bernie.jpg', 30, 150);
-			plane3.position.x = -130;
-			plane3.position.z = -145;
-			plane3.position.y = 0;
-			scene.add(plane3);
-			//scene.add(skybox);
-
-			var plane4 = createGround('bernie.jpg', 300, 50);
-			plane4.position.x = 30;
-			plane4.position.z = -200;
-			plane4.position.y = 0;
-			scene.add(plane4);
-
-			var plane5 = createGround('bernie.jpg', 50, 200);
-			plane5.position.x = 170;
-			plane5.position.z = -120;
-			plane5.position.y = 0;
-			scene.add(plane5);
-
-			var plane6 = createGround('bernie.jpg', 70, 30);
-			plane6.position.x = 120;
-			plane6.position.z = -35;
-			plane6.position.y = 0;
-			scene.add(plane6);
-
-			var plane7 = createGround('bernie.jpg', 30, 150);
-			plane7.position.x = 70;
-			plane7.position.z = 25;
-			plane7.position.y = 0;
-			scene.add(plane7);
-
-
-			var cone = createConeMesh(5,20);
-
-			cone.addEventListener( 'collision',
-					function(other_object) {
-						if(other_object==avatar) {
-							gameState.scene='youwon'
-						}
-					}
-				)
-			cone.position.set(70,20,70);
-
-			scene.add(cone);
-
-
 			// create the avatar
 			avatarCam = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 0.1, 1000 );
 			avatar = createAvatar();
@@ -161,18 +105,94 @@ The user moves a cube around the board trying to knock balls into a cone
 			scene.add(avatar);
 			gameState.camera = avatarCam;
 
-      edgeCam = new THREE.PerspectiveCamera( 90, window.innerWidth / window.innerHeight, 0.1, 1000 );
+			edgeCam = new THREE.PerspectiveCamera( 90, window.innerWidth / window.innerHeight, 0.1, 1000 );
       edgeCam.position.set(0,100,100);
 			gameState.camera = edgeCam;
+
+			createLevel1();
 	}
 
-	function createLevel2() {
+	function createLevel1() {
+		// create the ground and the skybox
 		var ground = createGround('bernie.jpg', 40, 150);
 		scene.add(ground);
 		var plane2 = createGround('bernie.jpg', 160, 30);
 		plane2.position.x = -60;
 		plane2.position.z = -85;
 		scene.add(plane2);
+
+		var plane3 = createGround('bernie.jpg', 30, 150);
+		plane3.position.x = -130;
+		plane3.position.z = -145;
+		plane3.position.y = 0;
+		scene.add(plane3);
+		//scene.add(skybox);
+
+		var plane4 = createGround('bernie.jpg', 300, 50);
+		plane4.position.x = 30;
+		plane4.position.z = -200;
+		plane4.position.y = 0;
+		scene.add(plane4);
+
+		var plane5 = createGround('bernie.jpg', 50, 200);
+		plane5.position.x = 170;
+		plane5.position.z = -120;
+		plane5.position.y = 0;
+		scene.add(plane5);
+
+		var plane6 = createGround('bernie.jpg', 70, 30);
+		plane6.position.x = 120;
+		plane6.position.z = -35;
+		plane6.position.y = 0;
+		scene.add(plane6);
+
+		var plane7 = createGround('bernie.jpg', 30, 150);
+		plane7.position.x = 70;
+		plane7.position.z = 25;
+		plane7.position.y = 0;
+		scene.add(plane7);
+
+
+
+		var cone = createConeMesh(5,20);
+
+		cone.addEventListener( 'collision',
+			function(other_object) {
+				if(other_object==avatar) {
+						scene.remove(ground);
+						scene.remove(plane2);
+						scene.remove(plane3);
+						scene.remove(plane4);
+						scene.remove(plane5);
+						scene.remove(plane6);
+						scene.remove(plane7);
+				}
+			}
+				)
+		cone.position.set(70,20,70);
+
+		scene.add(cone);
+
+	/*	lvl2Scene = initScene();
+
+		var light1 = createPointLight();
+		light1.position.set(0,200,20);
+		lvl2Scene.add(light1);
+		var light0 = new THREE.AmbientLight( 0xffffff,0.25);
+		lvl2Scene.add(light0);
+
+		var ground = createGround('bernie.jpg', 20, 150);
+		ground.rotateZ(Math.PI/2);
+		scene.add(ground);
+		var plane2 = createGround('bernie.jpg', 160, 30);
+		plane2.position.x = -60;
+		plane2.position.z = -85;
+		scene.add(plane2);
+
+		lvl2Camera = new THREE.PerspectiveCamera( 90, window.innerWidth / window.innerHeight, 0.1, 1000 );
+		lvl2Camera.position.set(0,50,1);
+		lvl2Camera.lookAt(0,0,0);
+		gameState.camera = lvl2Camera;*/
 	}
 
 	function createLevel3() {
@@ -197,7 +217,6 @@ The user moves a cube around the board trying to knock balls into a cone
 	function randN(n){
 		return Math.random()*n;
 	}
-
 
 
 
@@ -369,7 +388,7 @@ The user moves a cube around the board trying to knock balls into a cone
 		return mesh;
 	}
 
-	function createLevel1(){
+	/*function createLevel1(){
 		var loader = new THREE.JSONLoader();
 		loader.load("../models/marbleGame.json",
 		function ( geometry, materials ) {
@@ -385,11 +404,7 @@ The user moves a cube around the board trying to knock balls into a cone
 		function(xhr){
 						console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );},
 		function(err){console.log("error in loading: "+err);}
-		)
-
-
-
-	}
+	)}*/
 
 
 
