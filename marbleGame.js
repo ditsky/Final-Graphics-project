@@ -52,7 +52,7 @@ The user moves a cube around the board trying to knock balls into a cone
 
 		winScene = initScene();
 		winText = startScreen('youwon.png');
-		winText.rotateY(Math.PI);
+		//winText.rotateY(Math.PI);
 		winScene.add(winText);
 		var light1 = createPointLight();
 		light1.position.set(0,5,45);
