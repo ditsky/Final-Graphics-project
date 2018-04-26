@@ -292,6 +292,20 @@ function createBestLevel(){
 
 		var cone = createConeMesh(5,20);
 		cone.position.set(280, 320, 260);
+		cone.addEventListener( 'collision',
+			function(other_object) {
+				if(other_object==avatar) {
+					scene.remove(cone);
+					scene.remove(plane);
+					scene.remove(plane2);
+					scene.remove(plane3);
+					scene.remove(ground);
+					avatar.__dirtyPosition = true;
+					avatar.position.set(0,30,0);
+					createBestLevel();
+				}
+			}
+		)
 		scene.add(cone);
 
 	}
