@@ -288,7 +288,7 @@ function createBestLevel(){
 		scene.add(plane3);
 
 		var cone = createConeMesh(5,20);
-		cone.position.set(280, 320, 260);
+		cone.position.set(280, 315, 260);
 		scene.add(cone);
 
 	}
@@ -447,7 +447,7 @@ function createBestLevel(){
 
 	function createSkyBox(image,k){
 		// creating a textured plane which receives shadows
-		var geometry = new THREE.SphereGeometry( 500, 500, 500 );
+		var geometry = new THREE.SphereGeometry( 650, 650, 650 );
 		var texture = new THREE.TextureLoader().load( '../images/'+image );
 		texture.wrapS = THREE.RepeatWrapping;
 		texture.wrapT = THREE.RepeatWrapping;
