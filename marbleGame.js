@@ -18,7 +18,7 @@ The user moves a cube around the board trying to knock balls into a cone
 	var level1;
 	// var npc;
 
-	var winScene, loseScene, winCamera, loseCamera, winText, loseText, lvl2Scene, lvl2Camera;
+	var winScene, loseScene, winCamera, loseCamera, winText, loseText;
 
 
 
@@ -155,7 +155,8 @@ The user moves a cube around the board trying to knock balls into a cone
 
 
 		var cone = createConeMesh(5,20);
-
+		cone.position.set(70,20,70);
+		scene.add(cone);
 		cone.addEventListener( 'collision',
 			function(other_object) {
 				if(other_object==avatar) {
@@ -170,11 +171,8 @@ The user moves a cube around the board trying to knock balls into a cone
 						avatar.position.set(10,10,10);
 						createLevel3();
 				}
-			}
-				)
-		cone.position.set(70,20,70);
+			})
 
-		scene.add(cone);
 
 	/*	lvl2Scene = initScene();
 
