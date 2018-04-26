@@ -111,10 +111,95 @@ The user moves a cube around the board trying to knock balls into a cone
 
 			createLevel1();
 	}
+function createBestLevel(){
+	// var background = createGround('vaporwave.jpg',100,100);
+	// background.rotateX(90);
+	// background.rotateZ(180);
+	// background.position.z = -40;
+	// scene.add(background);
 
+	var grounddog = createGround('dogs.jpg', 40, 40);
+	scene.add(grounddog);
+	var plane2dog = createGround('green.jpg', 50, 50);
+	plane2dog.position.x = -30;
+	plane2dog.position.z = -45;
+
+	plane2dog.addEventListener( 'collision',
+		function(other_object) {
+			if(other_object==avatar) {
+
+					avatar.__dirtyPosition = true;
+					avatar.position.set(30,0,-200);
+
+			}
+		}
+			)
+				scene.add(plane2dog);
+
+	var plane4dog = createGround('dogs.jpg', 200, 50);
+	plane4dog.position.x = 30;
+	plane4dog.position.z = -200;
+	plane4dog.position.y = 0;
+	scene.add(plane4dog);
+
+	var plane5dog = createGround('green.jpg', 50, 50);
+	plane5dog.position.x = 157;
+	plane5dog.position.z = -200;
+	plane5dog.position.y = 0;
+
+	plane5dog.addEventListener( 'collision',
+		function(other_object) {
+			if(other_object==avatar) {
+
+					avatar.__dirtyPosition = true;
+					avatar.position.set(120,0,-35);
+
+			}
+		}
+			)
+				scene.add(plane5dog);
+	scene.add(plane5dog);
+
+	var plane6dog = createGround('dogs.jpg', 70, 30);
+	plane6dog.position.x = 120;
+	plane6dog.position.z = -35;
+	plane6dog.position.y = 0;
+
+
+	scene.add(plane6dog);
+
+	var plane7dog = createGround('dogs.jpg', 30, 150);
+	plane7dog.position.x = 70;
+	plane7dog.position.z = 25;
+	plane7dog.position.y = 0;
+	scene.add(plane7dog);
+
+
+
+}
 	function createLevel1() {
+		var light = createPointLight();
+		light.position.set(0,200,20);
+		var ground = createGround('bernie.jpg', 75, 100);
+		scene.add(ground);
+		var plane = createGroundFric('ice.jpg', 50, 200, 0);
+		plane.position.x = 0;
+		plane.position.y = 58;
+		plane.position.z = 130;
+		plane.rotateX(-Math.PI/5);
+		scene.add(plane);
+		var plane2 = createGround('bernie.jpg', 60, 150);
+		plane2.position.x = 0;
+		plane2.position.y = 120;
+		plane2.position.z = 295;
+		scene.add(plane2);
+		var cone = createConeMesh(5,20);
+		cone.position.set(0,120,295);
+		scene.add(cone);
+
+
 		// create the ground and the skybox
-		var ground = createGround('bernie.jpg', 40, 150);
+		/*var ground = createGround('bernie.jpg', 40, 150);
 		scene.add(ground);
 		var plane2 = createGround('bernie.jpg', 160, 30);
 		plane2.position.x = -60;
@@ -151,6 +236,7 @@ The user moves a cube around the board trying to knock balls into a cone
 		plane7.position.z = 25;
 		plane7.position.y = 0;
 		scene.add(plane7);
+		*/
 
 
 
@@ -210,13 +296,14 @@ The user moves a cube around the board trying to knock balls into a cone
 			})
 
 		plane.position.x = 0;
-		plane.position.y = 55;
+		plane.position.y = 58;
 		plane.position.z = 130;
 		plane.rotateX(-Math.PI/5);
 		scene.add(plane);
 		var plane2 = createGround('bernie.jpg', 60, 150);
-		plane2.position.x = 60;
-		plane2.position.z = 150;
+		plane2.position.x = 0;
+		plane2.position.y = 120;
+		plane2.position.z = 300;
 		scene.add(plane2);
 
 	}
