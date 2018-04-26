@@ -39,18 +39,29 @@ The user moves a cube around the board trying to knock balls into a cone
 	animate();  // start the animation loop!
 
 
-
+	function startScreen(image){
+			var geometry = new THREE.PlaneGeometry( 150, 100, 1280 );
+				var texture = new THREE.TextureLoader().load( '../images/'+image );
+				var planeMaterial = new THREE.MeshLambertMaterial( { color: 0xaaaaaa,  map: texture ,side:THREE.DoubleSide} );
+				start = new THREE.Mesh( geometry, planeMaterial );
+				start.receiveShadow = true;
+				return start;
+		}
 
 	function createWinScene(){
+
 		winScene = initScene();
-		winText = createSkyBox('youwon.png',10);
-		//endText.rotateX(Math.PI);
+		winText = startScreen('youwon.png');
+		winText.rotateY(Math.PI);
 		winScene.add(winText);
 		var light1 = createPointLight();
-		light1.position.set(0,200,20);
+		light1.position.set(0,5,45);
 		winScene.add(light1);
+		var light2 = createPointLight();
+		light2.position.set(0,0,45);
+		winScene.add(light2);
 		winCamera = new THREE.PerspectiveCamera( 90, window.innerWidth / window.innerHeight, 0.1, 1000 );
-		winCamera.position.set(0,50,1);
+		winCamera.position.set(0,0,40);
 		winCamera.lookAt(0,0,0);
 
 	}
@@ -108,7 +119,6 @@ The user moves a cube around the board trying to knock balls into a cone
 
 			edgeCam = new THREE.PerspectiveCamera( 90, window.innerWidth / window.innerHeight, 0.1, 1000 );
       edgeCam.position.set(0,100,100);
-			gameState.camera = edgeCam;
 
 			createLevel1();
 	}
@@ -171,6 +181,17 @@ function createBestLevel(){
 	plane7dog.position.z = 25;
 	plane7dog.position.y = 0;
 	scene.add(plane7dog);
+
+	var cone2 = createConeMesh(5,20);
+	cone2.position.set(70,20,70);
+	scene.add(cone2);
+	cone2.addEventListener('collision',
+		function(other_object){
+			if (other_object==avatar){
+				gameState.scene="youwon";
+			}
+		})
+
 
 
 
