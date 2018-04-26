@@ -180,26 +180,8 @@ function createBestLevel(){
 	function createLevel1() {
 		var light = createPointLight();
 		light.position.set(0,200,20);
-		var ground = createGround('bernie.jpg', 75, 100);
-		scene.add(ground);
-		var plane = createGroundFric('ice.jpg', 50, 200, 0);
-		plane.position.x = 0;
-		plane.position.y = 58;
-		plane.position.z = 130;
-		plane.rotateX(-Math.PI/5);
-		scene.add(plane);
-		var plane2 = createGround('bernie.jpg', 60, 150);
-		plane2.position.x = 0;
-		plane2.position.y = 120;
-		plane2.position.z = 295;
-		scene.add(plane2);
-		var cone = createConeMesh(5,20);
-		cone.position.set(0,120,295);
-		scene.add(cone);
-
-
 		// create the ground and the skybox
-		/*var ground = createGround('bernie.jpg', 40, 150);
+		var ground = createGround('bernie.jpg', 40, 150);
 		scene.add(ground);
 		var plane2 = createGround('bernie.jpg', 160, 30);
 		plane2.position.x = -60;
@@ -236,8 +218,6 @@ function createBestLevel(){
 		plane7.position.z = 25;
 		plane7.position.y = 0;
 		scene.add(plane7);
-		*/
-
 
 
 		var cone = createConeMesh(5,20);
@@ -283,8 +263,6 @@ function createBestLevel(){
 	}
 
 	function createLevel3() {
-		var light = createPointLight();
-		light.position.set(0,200,20);
 		var ground = createGround('bernie.jpg', 75, 100);
 		scene.add(ground);
 		var plane = createGroundFric('ice.jpg', 50, 200, 0);
@@ -294,7 +272,6 @@ function createBestLevel(){
 					controls.speed=140;
 				}
 			})
-
 		plane.position.x = 0;
 		plane.position.y = 58;
 		plane.position.z = 130;
@@ -303,8 +280,11 @@ function createBestLevel(){
 		var plane2 = createGround('bernie.jpg', 60, 150);
 		plane2.position.x = 0;
 		plane2.position.y = 120;
-		plane2.position.z = 300;
+		plane2.position.z = 295;
 		scene.add(plane2);
+		var cone = createConeMesh(5,20);
+		cone.position.set(0,120,295);
+		scene.add(cone);
 
 	}
 
@@ -596,7 +576,7 @@ function createBestLevel(){
 
   function updateAvatar(){
 		"change the avatar's linear or angular velocity based on controls state (set by WSAD key presses)"
-		if (avatar.position.y<-1000){
+		if (avatar.position.y<-100){
       avatar.__dirtyPosition = true;
       avatar.position.set(0,30,0);
 			gameState.health--;
