@@ -183,39 +183,39 @@ function createBestLevel(){
 		// create the ground and the skybox
 		var matrix = createSkyBox('matrix.jpg',2);
 		scene.add(matrix);
-		var ground = createGround('bernie.jpg', 40, 150);
+		var ground = createGround('metallic.jpg', 40, 150);
 		scene.add(ground);
-		var plane2 = createGround('bernie.jpg', 160, 30);
+		var plane2 = createGround('metallic.jpg', 160, 30);
 		plane2.position.x = -60;
 		plane2.position.z = -85;
 		scene.add(plane2);
 
-		var plane3 = createGround('bernie.jpg', 30, 150);
+		var plane3 = createGround('metallic.jpg', 30, 150);
 		plane3.position.x = -130;
 		plane3.position.z = -145;
 		plane3.position.y = 0;
 		scene.add(plane3);
 		//scene.add(skybox);
 
-		var plane4 = createGround('bernie.jpg', 300, 50);
+		var plane4 = createGround('metallic.jpg', 300, 50);
 		plane4.position.x = 30;
 		plane4.position.z = -200;
 		plane4.position.y = 0;
 		scene.add(plane4);
 
-		var plane5 = createGround('bernie.jpg', 50, 200);
+		var plane5 = createGround('metallic.jpg', 50, 200);
 		plane5.position.x = 170;
 		plane5.position.z = -120;
 		plane5.position.y = 0;
 		scene.add(plane5);
 
-		var plane6 = createGround('bernie.jpg', 70, 30);
+		var plane6 = createGround('metallic.jpg', 70, 30);
 		plane6.position.x = 120;
 		plane6.position.z = -35;
 		plane6.position.y = 0;
 		scene.add(plane6);
 
-		var plane7 = createGround('bernie.jpg', 30, 150);
+		var plane7 = createGround('metallic.jpg', 30, 150);
 		plane7.position.x = 70;
 		plane7.position.z = 25;
 		plane7.position.y = 0;
@@ -265,7 +265,7 @@ function createBestLevel(){
 	}
 
 	function createLevel3() {
-		var ground = createGround('bernie.jpg', 75, 100);
+		var ground = createGround('metallic.jpg', 75, 100);
 		scene.add(ground);
 		var plane = createGroundFric('ice.jpg', 50, 200, 0);
 		plane.addEventListener( 'collision',
@@ -279,7 +279,7 @@ function createBestLevel(){
 		plane.position.z = 130;
 		plane.rotateX(-Math.PI/5);
 		scene.add(plane);
-		var plane2 = createGround('bernie.jpg', 60, 150);
+		var plane2 = createGround('metallic.jpg', 60, 150);
 		plane2.position.x = 0;
 		plane2.position.y = 120;
 		plane2.position.z = 295;
