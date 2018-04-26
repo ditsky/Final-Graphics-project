@@ -267,6 +267,13 @@ function createBestLevel(){
 		var ground = createGround('bernie.jpg', 75, 100);
 		scene.add(ground);
 		var plane = createGroundFric('ice.jpg', 50, 200, 0);
+		plane.addEventListener( 'collision',
+			function(other_object) {
+				if(other_object==avatar) {
+					controls.speed=140;
+				}
+			})
+
 		plane.position.x = 0;
 		plane.position.y = 55;
 		plane.position.z = 130;
@@ -576,7 +583,7 @@ function createBestLevel(){
 			}
     }
 		var forward = avatar.getWorldDirection();
-
+		var gravity = new THREE.Vector3(0,-10,0);
 		if (controls.fwd){
 			avatar.setLinearVelocity(forward.multiplyScalar(controls.speed));
 		} else if (controls.bwd){
